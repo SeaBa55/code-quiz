@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+ 
+    <head>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <title>Coding Quiz</title>
+
+        <!-- CSS only -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="Assets/style.css">
+
+    </head>
+  
+    <body>
+
+        <!-- added nav bar to replace the current header for style -->
+        <nav class="navbar navbar-dark bg-dark">
+
+            <a class="navbar-brand" href="#">Coding Quiz</a>
+
+        </nav>
+
+        <main>
+
+            <!--Card taking up 12 Columns -->
+            <div class="container my-container">
+
+                <div class="col-md-12 wrapper">
+
+                    <div class="card mt-2">
+
+                        <div class="card-body hide" id="question-container">
+
+                            <div class="card-title" id="question">Question</div>
+
+                                <!-- line divider between heading and content -->
+                                <div class="line"><div>
+                                <br />
+
+                                <div id="answer-buttons" class="btn-grid">
+
+                                    <button class="btn">Ans 1</button>
+                                    <button class="btn">Ans 2</button>
+                                    <button class="btn">Ans 3</button>
+                                    <button class="btn">Ans 4</button>
+
+                                </div>
+
+                            </div>
+
+                            <div class="controls">
+
+                                <button id="start-btn" class="start-btn btn">Start</button>
+                                <button id="next-btn" class="next-btn btn hide">Next</button>
+
+                            </div>
+                        
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>  
+
+        <!-- Sticky Footer (modified - copied and pasted from https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/ -->
+        <footer class="footer mt-auto bg-dark">
+            <div class="container">
+
+                <span class="my-foot-text">© 2020 v1.0 - updated: 7/6 by S. Arrazola</span>
+                
+            </div>
+        </footer>
+
+        <!-- javascript relative path - **Commented-out untill ready to develop js file** -->
+        <!-- <script src="Develop/script.js"></script> -->
+
+    </body>
+
+</html>

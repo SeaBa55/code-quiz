@@ -38,5 +38,9 @@ You are required to submit the following for review:
 
 * The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
 
+### Version History
+
+Code_Quiz_v1.0 - Implementing template from js_password_generator assignment (Nav bar, background, card layout and sticky footer)(index.html & style.css). Also added container for questions, multiple choise buttons for answers, and Start/Next buttons for quiz navigation controls (index.html lines 44-51, 55-60). 
+
 - - -
 © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.

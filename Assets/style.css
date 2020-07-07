@@ -1,0 +1,54 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #f9fbfd;
+}
+
+.wrapper {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.card {
+  background-color: lightgray;
+  border-radius: 5px;
+  border-width: 1px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
+  color: hsl(206, 17%, 28%);
+  font-size: 18px;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 30px 40px;
+
+  /* Height at which footer collapses; 40px + 20px space between card and footer*/
+  margin-bottom: 60px;
+}
+
+.line {
+  border-top: 1px solid;
+}
+
+/* Sticky footer properties */
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  /* Set the fixed height of the footer here */
+  height: 40px;
+
+  /* Vertically center the text there */
+  line-height: 40px; 
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}
