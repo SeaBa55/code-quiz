@@ -36,6 +36,17 @@ body {
   border-top: 1px solid;
 }
 
+.controls {
+    /* add margin of 8px between last answer button and control buttons */
+    margin-top: 8px;
+    /* cneter controls buttons */
+    text-align: center;
+}
+
+/* .hide {
+  display: none;
+} */
+
 /* Sticky footer properties */
 .footer {
   position: absolute;

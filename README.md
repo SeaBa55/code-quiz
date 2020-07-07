@@ -40,9 +40,11 @@ You are required to submit the following for review:
 
 ### Version History
 
-code_quiz_v1.0 - Implementing template from js_password_generator assignment (Nav bar, background, card layout and sticky footer)(index.html & style.css). Also added container for questions, multiple choise buttons for answers, and Start/Next buttons for quiz navigation controls (index.html lines 44-51, 55-60). 
+code_quiz_v1.0 - Implementing template from js_password_generator assignment (Nav bar, background, card layout and sticky footer)(index.html & style.css); Also added container for questions, multiple choise buttons for answers, and Start/Next buttons for quiz navigation controls (index.html lines 44-51, 55-60). 
 
 code_quiz_v1.1 - Added bootstrap classes to all butons to further style their default look (index.html lines 46-49, 57-58).
+
+code_quiz_v1.2 - Moved "hide" class from "card-body" div container to the "answer-buttons" div container (index.html line 44); Added a previous button to potentially give the user a way to navegate backward to review their answers (index.html line 58); Added a margin of 8px between last answer button and the control buttons, also centered the control buttons (style.css lines 41, 43). Commented hide class to play with page appearance on the fly (development only)(style.css lines 46-48). Created empty script.js file in Assests, and uncommented the javascript relative path (index.html line 83).
 
 - - -
 © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
