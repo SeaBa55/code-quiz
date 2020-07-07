@@ -40,7 +40,9 @@ You are required to submit the following for review:
 
 ### Version History
 
-Code_Quiz_v1.0 - Implementing template from js_password_generator assignment (Nav bar, background, card layout and sticky footer)(index.html & style.css). Also added container for questions, multiple choise buttons for answers, and Start/Next buttons for quiz navigation controls (index.html lines 44-51, 55-60). 
+code_quiz_v1.0 - Implementing template from js_password_generator assignment (Nav bar, background, card layout and sticky footer)(index.html & style.css). Also added container for questions, multiple choise buttons for answers, and Start/Next buttons for quiz navigation controls (index.html lines 44-51, 55-60). 
+
+code_quiz_v1.1 - Added bootstrap classes to all butons to further style their default look (index.html lines 46-49, 57-58).
 
 - - -
 © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
