@@ -23,27 +23,27 @@ var questions = [
 ];
 
 // init global variable for question prompt text
-// var questionPrompt = document.getElementById('question-prompt');
+// js - var questionPrompt = document.getElementById('question-prompt');
 var questionPrompt = $('#question-prompt');
 
 // init global start-button variable
-// var startButton = document.getElementById('start-btn');
+// js - var startButton = document.getElementById('start-btn');
 var startButton = $('#start-btn');
 
 // init global previous-button variable
-// var prevButton = document.getElementById('prev-btn');
+// js - var prevButton = document.getElementById('prev-btn');
 var prevButton = $('#prev-btn');
 
 // init global next-button variable
-// var nextButton = document.getElementById('next-btn');
+// js - var nextButton = document.getElementById('next-btn');
 var nextButton = $('#next-btn');
 
 // init global variable for answer buttons container element 
-// var ansContainEl = document.getElementById('answer-buttons');
+// js - var ansContainEl = document.getElementById('answer-buttons');
 var ansContainEl = $('#answer-buttons');
 
 // start button event listener
-// startButton.addEventListener('click',startQuiz);
+// js - startButton.addEventListener('click',startQuiz);
 $(startButton).on('click',startQuiz)
 
 // function defining what is to happen upon quiz start
@@ -53,19 +53,38 @@ function startQuiz(){
     randQuestions = shuffle(questions);
 
     // adding hide class to the start button inorder to remove it from viewport
-    // startButton.classList.add('hide');
+    // js - startButton.classList.add('hide');
     $(startButton).addClass('hide');
 
     // replacing quiz instruction text with first question prompt
-    // questionPrompt.innerHTML = "Question 1";
+    // js - questionPrompt.innerHTML = "Question 1";
     $(questionPrompt).text(randQuestions[0].question);
 
+    // adding answer options programattically using the first element in question.options object array
+    questions[0].options.forEach(answer => {
+
+        // init button varible and create a new button element for each loop itteration
+        // js - let button = document.createElement('button');
+        let button = $("<button>")
+
+        // format button appearance using bootstrap classes 
+        // js - button.classList.add('btn','btn-outline-dark','btn-block');
+        $(button).addClass('btn btn-outline-dark btn-block');
+
+        // add multiple chois answer text to button
+        // js - button.innerHTML = answer;
+        $(button).text(answer);
+
+        // append button to answer-button div area
+        $("#answer-buttons").append(button);
+    })
+
     // removing hide class to the answer buttons container element, to show first quiz question answers in viewport
-    // ansContainEl.classList.remove('hide');
+    // js - ansContainEl.classList.remove('hide');
     $(ansContainEl).removeClass('hide');
-    
+
     // removing hide class to the next button element, to show next button in viewport
-    // nextButton.classList.remove('hide');
+    // js - nextButton.classList.remove('hide');
     $(nextButton).removeClass('hide');
 
 }

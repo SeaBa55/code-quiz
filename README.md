@@ -48,13 +48,11 @@ code_quiz_v1.2 - Moved "hide" class from "card-body" div container to the "answe
 
 code_quiz_v1.3 - Removed div tag that was not being used (index.html line 53); Changed id tag to "question-promt" for greater specificity (index.html line 39); Added a line heigh of 25px to create a known amount of space in the line-break below the line divider and the first answer button, and chnged the margin between last answer button and control buttons to match (style.css lines 11, 45); Uncommented hide class selector since it is now referenced in my script file (style.css lines 50-52); Added jQuery CDN (index.html line 83); Added javascript to hide start button upon click event, populate inital question & answers set, and provide a next button to allow user to cycle to the next question & answer set (writing in javascript, however, also attempting to repalce with jQuery to learn how it works - please ignore commented js lines above the equivalent jQuery code - will remove from final)(script.js lines 1-33).
 
-code_quiz_v1.4 - Added questions object array containing question prompts, multiple choice options, and corresponding answers (script.js lines 2-23); Added a shuffling function using Fisher–Yates method to randomize the order of the questions (script.js lines 74-90); Changed first question prompt to read the question from the first index of the random questions array (script.js line 61).     
+code_quiz_v1.4 - Added questions object array containing question prompts, multiple choice options, and corresponding answers (script.js lines 2-23); Added a shuffling function using Fisher–Yates method to randomize the order of the questions (script.js lines 74-90); Changed first question prompt to read the question from the first index of the random questions array (script.js line 61); Created function to programatically add buttons to the answer buttons container element (script.js lines 64-80); Commented-out hard-coded answer button (index.html lines 49-62).
 
 ## To-Do
 
-Incorporate questions array
-
-Randomize order or questions
+Incorporate previous button
 
 Add function to keep track of right vs. wrong answer count
 
