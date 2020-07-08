@@ -50,9 +50,11 @@ code_quiz_v1.3 - Removed div tag that was not being used (index.html line 53); C
 
 code_quiz_v1.4 - Added questions object array containing question prompts, multiple choice options, and corresponding answers (script.js lines 2-23); Added a shuffling function using Fisher–Yates method to randomize the order of the questions (script.js lines 74-90); Changed first question prompt to read the question from the first index of the random questions array (script.js line 61); Created function to programatically add buttons to the answer buttons container element (script.js lines 64-80); Commented-out hard-coded answer button (index.html lines 49-62).
 
+code_quiz_v1.5 - Added next button event listener (script.js line 54); Added nextQuest function to display next question and multiple choise options to the viewport (script.js lines 101-149); Added questionState function to keep track of what question user is on with questionIndex (nextQuest fucntion passes qi = 1 for increment of questionIndex and in the future a prevQuest fucntion will pass qi = -1 for decrement of questionIndex)(script.js lines 152-160); Added resetQuestions function to remove previous multiple choise answer options prior to appending new ones in the nextQuest fucntion (Note: resetQuestions will not clear the final set of multiple choise options)(script.js lines 163-173).
+
 ## To-Do
 
-Incorporate previous button
+Add fucntionality to previous button
 
 Add function to keep track of right vs. wrong answer count
 
