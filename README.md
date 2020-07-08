@@ -44,7 +44,31 @@ code_quiz_v1.0 - Implementing template from js_password_generator assignment (Na
 
 code_quiz_v1.1 - Added bootstrap classes to all butons to further style their default look (index.html lines 46-49, 57-58).
 
-code_quiz_v1.2 - Moved "hide" class from "card-body" div container to the "answer-buttons" div container (index.html line 44); Added a previous button to potentially give the user a way to navegate backward to review their answers (index.html line 58); Added a margin of 8px between last answer button and the control buttons, also centered the control buttons (style.css lines 41, 43). Commented hide class to play with page appearance on the fly (development only)(style.css lines 46-48). Created empty script.js file in Assests, and uncommented the javascript relative path (index.html line 83).
+code_quiz_v1.2 - Moved "hide" class from "card-body" div container to the "answer-buttons" div container (index.html line 44); Added a previous button to potentially give the user a way to navegate backward to review their answers (index.html line 58); Added a margin of 8px between last answer button and the control buttons, also centered the control buttons (style.css lines 41, 43); Commented hide class to play with page appearance on the fly (development only)(style.css lines 46-48); Created empty script.js file in Assests, and uncommented the javascript relative path (index.html line 83).
+
+code_quiz_v1.3 - Removed div tag that was not being used (index.html line 53); Changed id tag to "question-promt" for greater specificity (index.html line 39); Added a line heigh of 25px to create a known amount of space in the line-break below the line divider and the first answer button, and chnged the margin between last answer button and control buttons to match (style.css lines 11, 45); Added jQuery CDN (index.html line 83); Added javascript to hide start button upon click event, populate inital question & answers set, and provide a next button to allow user to cycle to the next question & answer set (writing in javascript, however, also attempting to repalce with jQuery to learn how it works (please ignore commented js lines above the equivalent jQuery code - will remove from final)(script.js lines 1-33).
+
+## To-Do
+
+Create questions array
+
+Incorporate questions array
+
+Randomize order or questions
+
+Add function to keep track of right vs. wrong answer count
+
+Add function to prevent user from going back to change answers (only allowed to view previous answers)
+
+Style button colors depending on correct selection
+
+Create timer and timer display area
+
+Report score
+
+Promot for initials and save results for highscore (JSON), else there is option to quit (restarts without saving) 
+
+## Wish List
 
 - - -
 © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.

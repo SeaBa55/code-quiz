@@ -6,6 +6,9 @@ html {
 body {
   font-family: sans-serif;
   background-color: #f9fbfd;
+  /* Added a line heigh of 25px to create a known amount of space in the line-break
+  below the line divider and the first answer button */
+  line-height: 25px;
 }
 
 .wrapper {
@@ -37,15 +40,16 @@ body {
 }
 
 .controls {
-    /* add margin of 8px between last answer button and control buttons */
-    margin-top: 8px;
-    /* cneter controls buttons */
+    /* add margin of 25px between last answer button and control buttons to match 
+    the line-break between the line divider and the first answer*/
+    margin-top: 25px;
+    /* center controls buttons */
     text-align: center;
 }
 
-/* .hide {
+.hide {
   display: none;
-} */
+}
 
 /* Sticky footer properties */
 .footer {
