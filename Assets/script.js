@@ -22,7 +22,7 @@ var questions = [
     answer: "terminal/bash"}
 ];
 
-// init array for user answer
+// init array for user answers
 var userAnswers = ["","","","",""];
 
 // init global var for user correct answer count
@@ -33,6 +33,12 @@ var userScore = "";
 
 // init global variable for question index - used by the questionState function
 var questionIndex = 0;
+
+// init global variable used to start timer
+var starTimer = 0;
+
+// init global variable for alloted time of 2 minutes - will be used to manipulate the timer based on wrong answer selections
+var secondsLeft = 120;
 
 // init global variable for question prompt text
 var questionPrompt = $('#question-prompt');
@@ -70,6 +76,9 @@ $(submitButton).on('click', results)
 
 // function defining what is to happen upon quiz start (after start button click event)
 function startQuiz(){
+
+    // start timer
+    starTimer = 1;
 
     // randomize ("suffle") question order. only needs to occur once.
     randQuestions = shuffle(questions);
@@ -139,6 +148,9 @@ function selectAns(e){
 
                 // else, if the answer is incorrect, then show the button with class "btn-danger" for red styling
                 $('#'+e.target.id).addClass('btn-danger'); 
+
+                // subtract 30 seconds off the clock
+                secondsLeft -= 30;
 
             }
 
@@ -257,7 +269,7 @@ function prevQuest(){
     // removing hide class to the prev button element, to show prev button in viewport
     if(questionIndex == 0) {
 
-        // if on first question hide the previous button - will likely have to move this to the prev button function once I create it.
+        // if on first question hide the previous button
         $(prevButton).addClass('hide');
 
     }
@@ -279,6 +291,7 @@ function prevQuest(){
 // function that determines the style of previous user selecton multiple choise buttons
 function prevAnsStyle() {
 
+    // if userAnswers is not empty at any given question index then proceed to restyle the buttons
     if(userAnswers[questionIndex] != "") {
 
         // give unique id to previous answer selection
@@ -341,23 +354,24 @@ function results() {
     $(formSmall).addClass('form-text text-muted');
     $(formBtns).addClass('form-grp-btns');
 
-
+    // add attributes and text to the from countrols 
     $(formSave).attr("id", "form-save-score");
     $(formInput).attr("placeholder", "Your Initials");
     $(formBtns).attr("id", "form-save-btn");
     $(formLable).text("Enter Initials");
     $(formSmall).text("Click Save to register your score");
 
-    
+    // append form controls to the form group div in the card-body container
     $("#form-save-score").append(formLable,formInput,formSmall,formBtns);
 
-
+    // add bootstrap classes to the save button
     $(formSaveBtn).addClass('save-btn btn btn-outline-dark');
-
+    
+    // add attributes and element text to the save button
     $(formSaveBtn).attr("type", "submit");
     $(formSaveBtn).text("Save")
 
-
+    // append save button to the button div container
     $("#form-save-btn").append(formSaveBtn);
 
 }
@@ -387,6 +401,8 @@ function resetQuestions() {
 
     }else {
 
+        // stop timer
+        starTimer = 0;
         // remove all child nodes in the quiz-container div element
         $("#quiz-container").empty();
 
@@ -428,3 +444,42 @@ function uniqueId(str) {
     // pass uid back to original function call
     return uid;
 }
+
+// Timekeeping function 
+function setTime() {
+
+  var timerInterval = setInterval(function() {
+
+    // don't start the  timer untill starTime = 1. start button triggers the timer, and submit button stops it
+    if (starTimer > 0){
+        
+        // decrement the timer every 1000ms
+        secondsLeft--;
+    
+    }
+
+    // write the value of seconds left in the Timer window in viewport
+    document.getElementById("display").value = " " + secondsLeft + " sec";
+
+    // if the timer runs out of time stop the timer and go results
+    if(secondsLeft <= 0) {
+
+        // if the timer goes negative due to low time and too many wrong answers, print "u suc" in the timer display - poke fun at the user so they play again!
+        if(secondsLeft < 0) {
+
+            document.getElementById("display").value = " u suc"
+        
+        }
+
+        clearInterval(timerInterval);
+        results();
+
+    }
+    
+    // 1000ms wait
+  }, 1000);
+
+}
+
+// continuous timer function call
+setTime();

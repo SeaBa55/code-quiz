@@ -3,40 +3,54 @@ html {
   min-height: 100%;
 }
 
+/* styling for timer display label */
+#label {
+    display: inline-block;
+    font-size: 15px;
+    color: white;
+    width: 50px;
+    text-align: right;
+}​
+
+/* styling for timer display element */
+#display {
+    display: block;
+}
+
 body {
-  font-family: sans-serif;
-  background-color: #f9fbfd;
-  /* Added a line heigh of 25px to create a known amount of space in the line-break
-  below the line divider and the first answer button */
-  line-height: 25px;
+    font-family: sans-serif;
+    background-color: #f9fbfd;
+    /* Added a line heigh of 25px to create a known amount of space in the line-break
+    below the line divider and the first answer button */
+    line-height: 25px;
 }
 
 .wrapper {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .card {
-  background-color: lightgray;
-  border-radius: 5px;
-  border-width: 1px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
-  color: hsl(206, 17%, 28%);
-  font-size: 18px;
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 30px 40px;
+    background-color: lightgray;
+    border-radius: 5px;
+    border-width: 1px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
+    color: hsl(206, 17%, 28%);
+    font-size: 18px;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 30px 40px;
 
-  /* Height at which footer collapses; 40px + 20px space between card and footer*/
-  margin-bottom: 60px;
+    /* Height at which footer collapses; 40px + 20px space between card and footer*/
+    margin-bottom: 60px;
 }
 
 .line {
-  border-top: 1px solid;
+    border-top: 1px solid;
 }
 
 .controls {
@@ -47,27 +61,29 @@ body {
     text-align: center;
 }
 
+/* hide class used to toggle certain elements from view port */
 .hide {
-  display: none;
+    display: none;
 }
 
+/* Add space between results form elements */
 #form-save-btn, #form-save-score {
     padding-top: 15px;
 }
 
 /* Sticky footer properties */
 .footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 
-  /* Set the fixed height of the footer here */
-  height: 40px;
+    /* Set the fixed height of the footer here */
+    height: 40px;
 
-  /* Vertically center the text there */
-  line-height: 40px; 
-  color: white;
-  text-align: center;
-  font-size: 14px;
+    /* Vertically center the text there */
+    line-height: 40px; 
+    color: white;
+    text-align: center;
+    font-size: 14px;
 }

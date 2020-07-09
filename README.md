@@ -60,6 +60,8 @@ code_quiz_v1.8 - Removed the conditional statment that checks if user has alread
 
 code_quiz_v1.9 - Added from elements to the results section, included is a place to type intials, a save button, and a div element area for the saved information to be displayed (titled 'Your Score History')(script.js lines 318-363). Added padding of 15px to the top of the save button and form group to create a little visual spacing between the results elements (styles.css lines 54-56).
 
+code_quiz_v2.0 - Added timer display area in the nav bar, using a input box as display (index.html lines 26-29); Added styling to both the timer display and the timer label (style.css lines 7-18); Added global variable "starTimer" used to start the time keeping function, and global variable "secondsLeft" for allotted quiz duration (also used for timer manipulation based on wrong answer selections)(script.js lines 38,41); Set "starTimer" variable equal to 1 in the startQuiz function to activate the timer upon quiz start (script.js line 81); Added timekeeping function using setTime() javascript method discussed in class. This function updates the timer display every second (script.js lines 448-485); Added timer variable "secondsLeft" to the selectAns function, where incorrect answers are processed. 30 seconds are subtracted from it to add time penalty for incorrect answer selection (script.js line 153).
+
 ## To-Do
 
 Create timer and timer display area
