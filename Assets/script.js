@@ -28,6 +28,9 @@ var userAnswers = ["","","","",""];
 // init global var for user correct answer count
 var userCorrect = 0;
 
+// init global var for user user score
+var userScore = "";
+
 // init global variable for question index - used by the questionState function
 var questionIndex = 0;
 
@@ -62,7 +65,7 @@ $(nextButton).on('click',nextQuest)
 $(prevButton).on('click',prevQuest)
 
 // submit button event listener
-$(submitButton).on('click')
+$(submitButton).on('click', results)
 
 
 // function defining what is to happen upon quiz start (after start button click event)
@@ -145,7 +148,6 @@ function selectAns(e){
         e.stopPropagation();
 
     }
-
 }
 
 
@@ -187,11 +189,8 @@ function nextQuest(){
         $("#answer-buttons").append(button);
     })
 
-    if(userAnswers[questionIndex] != "") {
-
-        prevAnsStyle()
-
-    }
+    // call function prevAnsStyle to check if question has already been aswered, and show user selections of previously answered items
+    prevAnsStyle()
 
     // removing hide class to the prev button element, to show prev button in viewport after the first question
    if(questionIndex == 1) {
@@ -214,6 +213,7 @@ function nextQuest(){
 }
 
 
+// function defining what is to happen upon clicking the prev button element
 function prevQuest(){
 
     // call resetQuestions to remove previous multiple choise answer options
@@ -243,18 +243,15 @@ function prevQuest(){
         // give each button a unique id using the answer it represents
         $(button).attr("id", buttonId);
 
-        // add multiple chois answer text to button
+        // add multiple choise answer text to button
         $(button).text(ans);
 
         // append button to answer-button div area
         $("#answer-buttons").append(button);
     })
 
-    if(userAnswers[questionIndex] != "") {
-
-        prevAnsStyle()
-
-    }
+    // call function prevAnsStyle to check if question has already been aswered, and show user selections of previously answered items
+    prevAnsStyle()
 
     // removing hide class to the prev button element, to show prev button in viewport
     if(questionIndex == 0) {
@@ -281,24 +278,50 @@ function prevQuest(){
 // function that determines the style of previous user selecton multiple choise buttons
 function prevAnsStyle() {
 
-    // give unique id to previous answer selection
-    let prevAnsId = uniqueId(userAnswers[questionIndex])
-        
-    // give unique id to correct answer
-    let ansId = uniqueId(questions[questionIndex].answer);
+    if(userAnswers[questionIndex] != "") {
 
+        // give unique id to previous answer selection
+        let prevAnsId = uniqueId(userAnswers[questionIndex])
+            
+        // give unique id to correct answer
+        let ansId = uniqueId(questions[questionIndex].answer);
 
-    if(prevAnsId == ansId) {
+        // compare user answer with correct answer to determine previously answered question styling
+        if(prevAnsId == ansId) {
 
-        // if the answer was correct, then show previous button selection with class "btn-success" for green styling
-        $('#'+prevAnsId).addClass('btn-success');
+            // if the answer was correct, then show previous button selection with class "btn-success" for green styling
+            $('#'+prevAnsId).addClass('btn-success');
 
-    }else{
+        }else{
 
-        // else, if the answer was incorrect, then show previous button selection with class "btn-danger" for red styling
-        $('#'+prevAnsId).addClass('btn-danger'); 
+            // else, if the answer was incorrect, then show previous button selection with class "btn-danger" for red styling
+            $('#'+prevAnsId).addClass('btn-danger'); 
 
+        }
     }
+}
+
+// results fucntion calculates user socre and creates new div elements to display result info in viewport. executes upon submit button click.
+function results() {
+
+    // calculate user score as a percent to one decemal place 
+    userScore = ((userCorrect/userAnswers.length) * 100).toFixed(1);
+
+    // reset the quiz-container div element to make space to write results
+    resetQuestions()
+
+    // create new div elements for results "page" content
+    let resultDiv = $("<div>");
+    let lineDiv = $("<div>"); 
+    let brk = $("<br/>");
+
+    // add classes to style the new div elements for results "page" content
+    $(resultDiv).addClass('card-title');
+    $(lineDiv).addClass('line');
+    $(resultDiv).text("Your Score: " + userScore + "%");
+
+    // append new content to the card-body container
+    $("#quiz-container").append(resultDiv,lineDiv,brk);
 
 }
 
@@ -317,10 +340,19 @@ function questionState(qi) {
 
 // function to remove previous multiple choise answer options
 function resetQuestions() {
-        
-    // remove all child nodes in the answer-buttons div element
-    $("#answer-buttons").empty();
+    
+    // if user score has not yet been calculated only perform reset on answer-buttons div element; else, clear the quiz-container div element for results
+    if(userScore == "") {
 
+        // remove all child nodes in the answer-buttons div element
+        $("#answer-buttons").empty();
+
+    }else {
+
+        // remove all child nodes in the quiz-container div element
+        $("#quiz-container").empty();
+
+    }
 }
 
 
