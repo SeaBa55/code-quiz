@@ -148,6 +148,7 @@ function selectAns(e){
         e.stopPropagation();
 
     }
+
 }
 
 
@@ -314,16 +315,53 @@ function results() {
     let resultDiv = $("<div>");
     let lineDiv = $("<div>"); 
     let brk = $("<br/>");
+    let scoreHist = $("<div>");
+    let formSave = $("<div>");
+    let formLable = $("<label>");
+    let formInput = $("<input>");
+    let formSmall = $("<small>");
+    let formBtns = $("<div>");
+    let formSaveBtn = $("<button>")
 
     // add classes to style the new div elements for results "page" content
     $(resultDiv).addClass('card-title');
     $(lineDiv).addClass('line');
+    $(scoreHist).addClass('scores-container');
+    $(formSave).addClass('form-group');
+
+    // add classes to style the new div elements for results "page" content
     $(resultDiv).text("Your Score: " + userScore + "%");
+    $(scoreHist).text("Your Score History:");
 
     // append new content to the card-body container
-    $("#quiz-container").append(resultDiv,lineDiv,brk);
+    $("#quiz-container").append(resultDiv,lineDiv,brk,scoreHist,formSave);
+
+    // add classes to style the new from elements for results "page" content
+    $(formInput).addClass('form-control');
+    $(formSmall).addClass('form-text text-muted');
+    $(formBtns).addClass('form-grp-btns');
+
+
+    $(formSave).attr("id", "form-save-score");
+    $(formInput).attr("placeholder", "Your Initials");
+    $(formBtns).attr("id", "form-save-btn");
+    $(formLable).text("Enter Initials");
+    $(formSmall).text("Click Save to register your score");
+
+    
+    $("#form-save-score").append(formLable,formInput,formSmall,formBtns);
+
+
+    $(formSaveBtn).addClass('save-btn btn btn-outline-dark');
+
+    $(formSaveBtn).attr("type", "submit");
+    $(formSaveBtn).text("Save")
+
+
+    $("#form-save-btn").append(formSaveBtn);
 
 }
+
 
 
 // function to keep track of what question user is on with questionIndex. pass qi = 1 for increment, and qi = -1 for decrement.

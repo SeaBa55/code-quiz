@@ -51,6 +51,10 @@ body {
   display: none;
 }
 
+#form-save-btn, #form-save-score {
+    padding-top: 15px;
+}
+
 /* Sticky footer properties */
 .footer {
   position: absolute;
