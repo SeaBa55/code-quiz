@@ -22,52 +22,46 @@ var questions = [
     answer: "terminal/bash"}
 ];
 
+// init array for user answer
+var userAnswers = ["","","","",""];
+
+// init global var for user correct answer count
+var userCorrect = 0;
 
 // init global variable for question index - used by the questionState function
 var questionIndex = 0;
 
 // init global variable for question prompt text
-// js - var questionPrompt = document.getElementById('question-prompt');
 var questionPrompt = $('#question-prompt');
 
 // init global variable for answer buttons container element 
-// js - var ansContainEl = document.getElementById('answer-buttons');
 var ansContainEl = $('#answer-buttons');
 
 // init global start-button variable
-// js - var startButton = document.getElementById('start-btn');
 var startButton = $('#start-btn');
 
 // init global previous-button variable
-// js - var prevButton = document.getElementById('prev-btn');
 var prevButton = $('#prev-btn');
 
 // init global next-button variable
-// js - var nextButton = document.getElementById('next-btn');
 var nextButton = $('#next-btn');
 
 // init global next-button variable
-// js - var submitButton = document.getElementById('submit-btn');
 var submitButton = $('#submit-btn');
 
 // multiple choise option buttons event listener on parent div element answer-buttons 
-// js - ansContainEl.addEventListener('click',electAns);
 $(ansContainEl).on('click',selectAns)
 
 // start button event listener
-// js - startButton.addEventListener('click',startQuiz);
 $(startButton).on('click',startQuiz)
 
 // next button event listener
-// js - nextButton.addEventListener('click',nextQuest);
 $(nextButton).on('click',nextQuest)
 
 // prev button event listener
-// js - prevButton.addEventListener('click',prevQuest);
 $(prevButton).on('click',prevQuest)
 
 // submit button event listener
-// js - prevButton.addEventListener('click');
 $(submitButton).on('click')
 
 
@@ -78,44 +72,37 @@ function startQuiz(){
     randQuestions = shuffle(questions);
 
     // adding hide class to the start button inorder to remove it from viewport
-    // js - startButton.classList.add('hide');
     $(startButton).addClass('hide');
 
     // replacing quiz instruction text with first question prompt
-    // js - questionPrompt.innerHTML = "Question 1";
     $(questionPrompt).text(randQuestions[questionIndex].question);
 
     // adding answer options programattically using the first element in question.options object array
-    questions[questionIndex].options.forEach(answer => {
+    questions[questionIndex].options.forEach(ans => {
 
         // init button varible and create a new button element for each loop itteration
-        // js - let button = document.createElement('button');
         let button = $("<button>")
 
         // create a 3 character unique id to assign to each multiple choise option button. uses first 3 characters of text associated with each button.  
-        let buttonId = uniqueId(answer);
+        let buttonId = uniqueId(ans);
 
         // format button appearance using bootstrap classes 
-        // js - button.classList.add('btn','btn-outline-dark','btn-block');
         $(button).addClass('btn btn-outline-dark btn-block chosen');
 
         // give each button a unique id using the answer it represents
         $(button).attr("id", buttonId);
 
         // add multiple chois answer text to button
-        // js - button.innerHTML = answer;
-        $(button).text(answer);
+        $(button).text(ans);
 
         // append button to answer-button div area
         $("#answer-buttons").append(button);
     })
 
     // removing hide class to the answer buttons container element, to show first quiz question answers in viewport
-    // js - ansContainEl.classList.remove('hide');
     $(ansContainEl).removeClass('hide');
 
     // removing hide class to the next button element, to show next button in viewport
-    // js - nextButton.classList.remove('hide');
     $(nextButton).removeClass('hide');
 
 }
@@ -124,21 +111,40 @@ function startQuiz(){
 // fucntion that handles multiple choice click events through parent div element answer-buttons 
 function selectAns(e){
 
-    // optimization that ensures user is not registering a click on the parent element itself 
-    if(e.target !== e.currentTarget) {
+    // only let user make multiple choise selections for unanswered questions
+    if(userAnswers[questionIndex] === "") {
 
+        // optimization that ensures user is not registering a click on the parent element itself 
+        if(e.target !== e.currentTarget) {
 
-        let ansId = uniqueId(questions[questionIndex].answer);
+            // store answer in userAnswer array by replacing default value with the text content of the selected multiple choise option
+            userAnswers.splice(questionIndex, 1, e.target.textContent);
 
-        if(e.target.id == ansId) {
-            $('#'+e.target.id).addClass('btn-success');
-        }else{
-            $('#'+e.target.id).addClass('btn-danger'); 
+            // create a 3 character unique id to compare correct answer to the user-selected multiple choise answer. uses first 3 characters of text associated with the correct answer.
+            let ansId = uniqueId(questions[questionIndex].answer);
+
+            // compare the target button id with the correct answer 3 character unique id
+            if(e.target.id == ansId) {
+
+                // if the answer is correct, then show the button with class "btn-success" for green styling
+                $('#'+e.target.id).addClass('btn-success');
+
+                // increment the user's correct answers count - to be used for user score calculation upon submit button on-click event
+                userCorrect++;
+
+            }else{
+
+                // else, if the answer is incorrect, then show the button with class "btn-danger" for red styling
+                $('#'+e.target.id).addClass('btn-danger'); 
+
+            }
+
         }
 
-    }
+        // kill event propagation at the "answer-button" div element (multiple choise buttons parent) level
+        e.stopPropagation();
 
-    e.stopPropagation();
+    }
 
 }
 
@@ -156,21 +162,18 @@ function nextQuest(){
     questionState(qi)
 
     // replacing quiz instruction text with first question prompt
-    // js - questionPrompt.innerHTML = "Question 1";
     $(questionPrompt).text(randQuestions[questionIndex].question);
 
     // adding answer options programattically using the first element in question.options object array
-    questions[questionIndex].options.forEach(answer => {
+    questions[questionIndex].options.forEach(ans => {
 
         // init button varible and create a new button element for each loop itteration
-        // js - let button = document.createElement('button');
         let button = $("<button>")
 
         // create a 3 character unique id to assign to each multiple choise option button. uses first 3 characters of text associated with each button.  
-        let buttonId = uniqueId(answer);
+        let buttonId = uniqueId(ans);
 
         // format button appearance using bootstrap classes 
-        // js - button.classList.add('btn','btn-outline-dark','btn-block');
         $(button).addClass('btn btn-outline-dark btn-block chosen');
 
         // give each button a unique id using the answer it represents
@@ -178,17 +181,22 @@ function nextQuest(){
 
         // add multiple choise answer text to button
         // js - button.innerHTML = answer;
-        $(button).text(answer);
+        $(button).text(ans);
 
         // append button to answer-button div area
         $("#answer-buttons").append(button);
     })
 
+    if(userAnswers[questionIndex] != "") {
+
+        prevAnsStyle()
+
+    }
+
     // removing hide class to the prev button element, to show prev button in viewport after the first question
    if(questionIndex == 1) {
 
         // if on second question show the previous button - will remain active untill submit button is pressed (need to create a submit button)
-        // js - prevButton.classList.remove('hide');
         $(prevButton).removeClass('hide');
 
     }
@@ -197,11 +205,9 @@ function nextQuest(){
     if(questionIndex > 3) {
 
         // adding hide class to the next button element, to remove next button in viewport
-        // js - nextButton.classList.addClass('hide');
         $(nextButton).addClass('hide');
 
         // removing hide class to the submit button element, to add submit button in viewport
-        // js - submitButton.classList.removeClass('hide');
         $(submitButton).removeClass('hide');
     }
 
@@ -220,36 +226,37 @@ function prevQuest(){
     questionState(qi)
 
     // replacing quiz instruction text with first question prompt
-    // js - questionPrompt.innerHTML = "Question 1";
     $(questionPrompt).text(randQuestions[questionIndex].question);
 
     // adding answer options programattically using the first element in question.options object array
-    questions[questionIndex].options.forEach(answer => {
+    questions[questionIndex].options.forEach(ans => {
 
         // init button varible and create a new button element for each loop itteration
-        // js - let button = document.createElement('button');
         let button = $("<button>")
 
         // create a 3 character unique id to assign to each multiple choise option button. uses first 3 characters of text associated with each button.  
-        let buttonId = uniqueId(answer);
+        let buttonId = uniqueId(ans);
 
         // format button appearance using bootstrap classes 
-        // js - button.classList.add('btn','btn-outline-dark','btn-block');
         $(button).addClass('btn btn-outline-dark btn-block chosen');
 
         // give each button a unique id using the answer it represents
         $(button).attr("id", buttonId);
 
         // add multiple chois answer text to button
-        // js - button.innerHTML = answer;
-        $(button).text(answer);
+        $(button).text(ans);
 
         // append button to answer-button div area
         $("#answer-buttons").append(button);
     })
 
+    if(userAnswers[questionIndex] != "") {
+
+        prevAnsStyle()
+
+    }
+
     // removing hide class to the prev button element, to show prev button in viewport
-    // js - nextButton.classList.remove('hide');
     if(questionIndex == 0) {
 
         // if on first question hide the previous button - will likely have to move this to the prev button function once I create it.
@@ -261,12 +268,35 @@ function prevQuest(){
     if(questionIndex < 4) {
 
         // removing hide class to the next button element, to show next button in viewport
-        // js - nextButton.classList.remove('hide');
         $(nextButton).removeClass('hide');
 
         // adding hide class to the submit button element, to remove submit button in viewport
-        // js - submitButton.classList.addClass('hide');
         $(submitButton).addClass('hide');
+
+    }
+
+}
+
+
+// function that determines the style of previous user selecton multiple choise buttons
+function prevAnsStyle() {
+
+    // give unique id to previous answer selection
+    let prevAnsId = uniqueId(userAnswers[questionIndex])
+        
+    // give unique id to correct answer
+    let ansId = uniqueId(questions[questionIndex].answer);
+
+
+    if(prevAnsId == ansId) {
+
+        // if the answer was correct, then show previous button selection with class "btn-success" for green styling
+        $('#'+prevAnsId).addClass('btn-success');
+
+    }else{
+
+        // else, if the answer was incorrect, then show previous button selection with class "btn-danger" for red styling
+        $('#'+prevAnsId).addClass('btn-danger'); 
 
     }
 
@@ -287,14 +317,9 @@ function questionState(qi) {
 
 // function to remove previous multiple choise answer options
 function resetQuestions() {
-
-    // do not remove last multiple choise answer option set based on second to last next-button click 
-    // if(questionIndex < (questions.length)) {
         
-        // remove all child nodes in the answer-buttons div element
-        $("#answer-buttons").empty();
-    
-    // }
+    // remove all child nodes in the answer-buttons div element
+    $("#answer-buttons").empty();
 
 }
 
