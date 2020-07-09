@@ -50,17 +50,15 @@ code_quiz_v1.3 - Removed div tag that was not being used (index.html line 53); C
 
 code_quiz_v1.4 - Added questions object array containing question prompts, multiple choice options, and corresponding answers (script.js lines 2-23); Added a shuffling function using Fisher–Yates method to randomize the order of the questions (script.js lines 74-90); Changed first question prompt to read the question from the first index of the random questions array (script.js line 61); Created function to programatically add buttons to the answer buttons container element (script.js lines 64-80); Commented-out hard-coded answer button (index.html lines 49-62).
 
-code_quiz_v1.5 - Added next button event listener (script.js line 54); Added nextQuest function to display next question and multiple choise options to the viewport (script.js lines 101-149); Added questionState function to keep track of what question user is on with questionIndex (nextQuest fucntion passes qi = 1 for increment of questionIndex and in the future a prevQuest fucntion will pass qi = -1 for decrement of questionIndex)(script.js lines 152-160); Added resetQuestions function to remove previous multiple choise answer options prior to appending new ones in the nextQuest fucntion (Note: resetQuestions will not clear the final set of multiple choise options)(script.js lines 163-173).
+code_quiz_v1.5 - Added next button event listener (script.js line 54); Added nextQuest function to display next question and multiple choise options to the viewport (script.js lines 101-149); Added questionState function to keep track of what question user is on with questionIndex (nextQuest fucntion passes qi = 1 for increment of questionIndex and in the future a prevQuest fucntion will pass qi = -1 for decrement of questionIndex)(script.js lines 152-160); Added resetQuestions function to remove previous multiple choise answer options prior to appending new ones in the nextQuest fucntion (script.js lines 163-173).
+
+code_quiz_v1.6 - Added next button event listener (script.js line 67); Added prevQuest function which gives the newly added prev button the ability to go back a question set (script.js lines 211 - 249); Removed next button on final question which was the real reason the answers were disappearing on the final question (script.js line 201); Added submit button and coresponding event listener (inert - for future use)(index.html line 62)(script.js lines 51, 71); Added event listener to the multiple choise button's parent element which is used to catch on-click events of its childen (script.js lines 35, 55); Added selectAns function that handles multiple choice on-click events through parent div element answer-buttons, and adds class "btn-success" to correct, and "btn-danger" to wrong answer button selection (script.js lines 125-143), Added function to create unique id selectors, which are assigned each multiple choise button. Each unique id is named after the first 3 characters of the answer it represents (used in selectAns function)(script.js lines 322-335) added color btn-success to correct, and btn-danger to wrong answers.
 
 ## To-Do
-
-Add fucntionality to previous button
 
 Add function to keep track of right vs. wrong answer count
 
 Add function to prevent user from going back to change answers (only allowed to view previous answers)
-
-Style button colors depending on correct selection
 
 Create timer and timer display area
 
@@ -69,6 +67,12 @@ Report score
 Promot for initials and save results for highscore (JSON), else there is option to quit (restarts without saving) 
 
 ## Wish List
+
+Removed highlighted border around next and prev button when on next question after having pressed either button previously
+
+Replace control buttons event listeners with on event listener using the parent class "controls". Better practice moving forward as it is less taxin on memory and cleaner to debug/ look at.
+
+Consolidate the "foreach" loops that create the multiple choise buttons within startQuiz, nextQuest, and prevQuest functions into one function to tidy up javascript. 
 
 - - -
 © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
