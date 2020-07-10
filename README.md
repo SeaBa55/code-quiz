@@ -62,17 +62,19 @@ code_quiz_v1.9 - Added from elements to the results section, included is a place
 
 code_quiz_v2.0 - Added timer display area in the nav bar, using a input box as display (index.html lines 26-29); Added styling to both the timer display and the timer label (style.css lines 7-18); Added global variable "starTimer" used to start the time keeping function, and global variable "secondsLeft" for allotted quiz duration (also used for timer manipulation based on wrong answer selections)(script.js lines 38,41); Set "starTimer" variable equal to 1 in the startQuiz function to activate the timer upon quiz start (script.js line 81); Added timekeeping function using setTime() javascript method discussed in class. This function updates the timer display every second (script.js lines 448-485); Added timer variable "secondsLeft" to the selectAns function, where incorrect answers are processed. 30 seconds are subtracted from it to add time penalty for incorrect answer selection (script.js line 153).
 
+code_quiz_v2.1 - Polished style of results section, added initial functionality to the the save button, and added a retry button that reloads the page (retry button can bypass the save feature, but is also availible after saving)(script.js lines 330-427); Added styling to the form button controls and the score history section (style.css 70-82); Removed class "btn-outline-dark" from the selected answes in the quiz to better visualize if the selection was wright or wrong (in mobile devices the "btn-outline-dark" styling would rened the selection dark until you came back to that question)(script.js lines 143, 153);
+
 ## To-Do
 
-Create timer and timer display area
-
-Promot for initials and save results for highscore (JSON), else there is option to quit (restarts without saving) 
+Promot for initials and save results for highscore (JSON), else there is option to quit (restarts without saving)
 
 ## Wish List
 
-Removed highlighted border around next and prev button when on next question after having pressed either button previously
+Display the number of unanswered questions remaining till completion.
 
-Replace control buttons event listeners with on event listener using the parent class "controls". Better practice moving forward as it is less taxin on memory and cleaner to debug/ look at.
+Remove highlighted border around next and prev button when on next question after having pressed either button previously.
+
+Replace control buttons event listeners with one event listener, using the parent class "controls". Better practice, moving forward, as it is less taxing on memory and cleaner to debug/ look at.
 
 Consolidate the "foreach" loops that create the multiple choise buttons within startQuiz, nextQuest, and prevQuest functions into one function to tidy up javascript. 
 

@@ -140,6 +140,7 @@ function selectAns(e){
 
                 // if the answer is correct, then show the button with class "btn-success" for green styling
                 $('#'+e.target.id).addClass('btn-success');
+                $('#'+e.target.id).removeClass('btn-outline-dark');
 
                 // increment the user's correct answers count - to be used for user score calculation upon submit button on-click event
                 userCorrect++;
@@ -148,7 +149,8 @@ function selectAns(e){
 
                 // else, if the answer is incorrect, then show the button with class "btn-danger" for red styling
                 $('#'+e.target.id).addClass('btn-danger'); 
-
+                $('#'+e.target.id).removeClass('btn-outline-dark');
+                
                 // subtract 30 seconds off the clock
                 secondsLeft -= 30;
 
@@ -324,58 +326,109 @@ function results() {
     // reset the quiz-container div element to make space to write results
     resetQuestions()
 
-    // create new div elements for results "page" content
-    let resultDiv = $("<div>");
-    let lineDiv = $("<div>"); 
-    let brk = $("<br/>");
-    let scoreHist = $("<div>");
-    let formSave = $("<div>");
-    let formLable = $("<label>");
-    let formInput = $("<input>");
-    let formSmall = $("<small>");
-    let formBtns = $("<div>");
-    let formSaveBtn = $("<button>")
+    // Init vars for results section
+    var resultDiv = $("<div>");
+    var lineDiv = $("<div>"); 
+    var brk = $("<br/>");
+    var scoreHist = $("<div>");
+    var formSave = $("<div>");
+    var formLable = $("<label>");
+    var formInput = $("<input>");
+    var formSmall = $("<small>");
+    var formBtns = $("<div>");
+    var formSaveBtn = $("<button>");
+    var formRetryBtn =  $("<button>");
 
-    // add classes to style the new div elements for results "page" content
+    // add classes to style the div elements for results section
     $(resultDiv).addClass('card-title');
     $(lineDiv).addClass('line');
-    $(scoreHist).addClass('scores-container');
+    $(scoreHist).addClass('scores-container hide');
     $(formSave).addClass('form-group');
 
-    // add classes to style the new div elements for results "page" content
+    $(scoreHist).attr("id", "score-hist");
+
+    // add text to the card title to report user's current score
     $(resultDiv).text("Your Score: " + userScore + "%");
     $(scoreHist).text("Your Score History:");
 
     // append new content to the card-body container
-    $("#quiz-container").append(resultDiv,lineDiv,brk,scoreHist,formSave);
+    $("#quiz-container").append(resultDiv,lineDiv,brk,scoreHist,formSave,formBtns);
 
-    // add classes to style the new from elements for results "page" content
+    // add classes to style the results section from elements
     $(formInput).addClass('form-control');
     $(formSmall).addClass('form-text text-muted');
+    //
     $(formBtns).addClass('form-grp-btns');
 
     // add attributes and text to the from countrols 
     $(formSave).attr("id", "form-save-score");
     $(formInput).attr("placeholder", "Your Initials");
-    $(formBtns).attr("id", "form-save-btn");
+    $(formBtns).attr("id", "form-control-btn");
     $(formLable).text("Enter Initials");
-    $(formSmall).text("Click Save to register your score");
+    $(formSmall).text("Click Save to register score");
 
     // append form controls to the form group div in the card-body container
-    $("#form-save-score").append(formLable,formInput,formSmall,formBtns);
+    $("#form-save-score").append(formLable,formInput,formSmall);
 
-    // add bootstrap classes to the save button
+    // add bootstrap classes to the form button controls
     $(formSaveBtn).addClass('save-btn btn btn-outline-dark');
+    $(formRetryBtn).addClass('save-btn btn btn-outline-dark');
     
-    // add attributes and element text to the save button
+    // add type attributes for acces
     $(formSaveBtn).attr("type", "submit");
-    $(formSaveBtn).text("Save")
+    $(formRetryBtn).attr("type", "button");
+
+    // add form button controls id's
+    $(formSaveBtn).attr("id", "save-btn");
+    $(formRetryBtn).attr("id", "retry-btn");
+
+    // add form button controls names in viewport
+    $(formSaveBtn).text("Save");
+    $(formRetryBtn).text("Retry");
 
     // append save button to the button div container
-    $("#form-save-btn").append(formSaveBtn);
+    $("#form-control-btn").append(formSaveBtn,formRetryBtn);
+
+    // form button controls event listener on parent div element form-save-btn
+    $("#form-control-btn").on('click',formControlHandler);
 
 }
 
+// form button controls event handler function
+function formControlHandler(e){
+    
+    // optimization that ensures user is not registering a click on the parent element itself 
+    if(e.target !== e.currentTarget) {
+
+        // check if target button id coresponds with save button
+        if(e.target.id == "save-btn") {
+
+            // hide save button
+            $('#'+e.target.id).addClass('hide');
+            
+            // hide #form-save-score div element
+            $('#form-save-score').addClass('hide');
+
+            // ----------------------------------------------------------------
+            // save user data to browser, and append to #form-save-score (JSON)
+            // ----------------------------------------------------------------
+
+            // show score history
+            $('#score-hist').removeClass('hide');
+        
+        // check if target button id coresponds with retry button
+        }else if(e.target.id == "retry-btn"){
+
+            // reload page to start over and attempt to surpass previous scores
+            location.reload();
+
+        }
+
+    }
+
+    // kill event propagation at the "form-control-btn" div element (form button controls event listener on parent) level
+    e.stopPropagation();    
+}
 
 
 // function to keep track of what question user is on with questionIndex. pass qi = 1 for increment, and qi = -1 for decrement.
