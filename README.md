@@ -66,15 +66,13 @@ code_quiz_v2.1 - Polished style of results section, added initial functionality 
 
 code_quiz_v2.2 - Added input form element id of "form-input-init" to be able to reference the user's initials (used extensively in the formControlHandler function)(script.js line 367); Added functionality to be able to save user result data (initials, score, and time elapsed) to browser storge, and append the results to the #score-hist div element as children paragraph elements (localStorage utilized to save user results to browser storage)(script.js lines 418-466); Created a nested loop to extract stored user results from localStorage, and have them appended to the score history display area in the viewport (script.js lines 475-495). Added diable double tap zoom and overflow "hidden" the html and timer display elements, respectively, to help with viewport behavior while on mobile device (style.css lines 7-9, 21-24). 
 
-## To-Do
-
-fix rendering of the timer and score history section in iOS devices/ mobile view
+code_quiz_v2.3 - Added a "clear" button to the results history form controls, that enables the user to clear their score history (script.js lines 378, 383, 393, 396, 416, 516-525); Refactored the score history section elements and styling to display as list items, instead of text nodes (script.js lines 489-504)(style.css lines 91-95).
 
 ## Wish List
 
-Review styling of viewport to make it a bit more entertaining to look at.
+Add fumctionality that prevents user from viewing results history if no initials have been input.
 
-Add reset button to give user the ability to clear results data in localStorage. 
+Adjust rendering of the timer and score history text for iOS devices/ mobile view.
 
 Display the number of unanswered questions remaining till completion.
 

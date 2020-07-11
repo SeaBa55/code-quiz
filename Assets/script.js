@@ -71,7 +71,7 @@ $(nextButton).on('click',nextQuest)
 $(prevButton).on('click',prevQuest)
 
 // submit button event listener
-$(submitButton).on('click', results)
+$(submitButton).on('click',results)
 
 
 // function defining what is to happen upon quiz start (after start button click event)
@@ -330,7 +330,7 @@ function results() {
     var resultDiv = $("<div>");
     var lineDiv = $("<div>"); 
     var brk = $("<br/>");
-    var scoreHist = $("<div>");
+    var scoreHist = $("<ul>");
     var formSave = $("<div>");
     var formLable = $("<label>");
     var formInput = $("<input>");
@@ -338,11 +338,12 @@ function results() {
     var formBtns = $("<div>");
     var formSaveBtn = $("<button>");
     var formRetryBtn =  $("<button>");
+    var formClearBtn =  $("<button>");
 
     // add classes to style the div elements for results section
     $(resultDiv).addClass('card-title');
     $(lineDiv).addClass('line');
-    $(scoreHist).addClass('scores-container hide');
+    $(scoreHist).addClass('list-group list-group-flush hide');
     $(formSave).addClass('form-group');
 
     $(scoreHist).attr("id", "score-hist");
@@ -372,23 +373,27 @@ function results() {
     $("#form-save-score").append(formLable,formInput,formSmall);
 
     // add bootstrap classes to the form button controls
-    $(formSaveBtn).addClass('save-btn btn btn-outline-dark');
-    $(formRetryBtn).addClass('save-btn btn btn-outline-dark');
+    $(formSaveBtn).addClass('btn btn-outline-dark');
+    $(formRetryBtn).addClass('btn btn-outline-dark');
+    $(formClearBtn).addClass('btn btn-outline-danger hide');
     
     // add type attributes for acces
     $(formSaveBtn).attr("type", "submit");
     $(formRetryBtn).attr("type", "button");
+    $(formClearBtn).attr("type", "button");
 
     // add form button controls id's
     $(formSaveBtn).attr("id", "save-btn");
     $(formRetryBtn).attr("id", "retry-btn");
+    $(formClearBtn).attr("id", "clear-btn");
 
     // add form button controls names in viewport
     $(formSaveBtn).text("Save");
     $(formRetryBtn).text("Retry");
+    $(formClearBtn).text("Clear");
 
     // append save button to the button div container
-    $("#form-control-btn").append(formSaveBtn,formRetryBtn);
+    $("#form-control-btn").append(formSaveBtn,formRetryBtn,formClearBtn);
 
     // form button controls event listener on parent div element form-save-btn
     $("#form-control-btn").on('click',formControlHandler);
@@ -407,6 +412,9 @@ function formControlHandler(e){
             // hide save button
             $('#'+e.target.id).addClass('hide');
             
+            // show the clear button
+            $('#clear-btn').removeClass('hide');
+
             // hide #form-save-score div element
             $('#form-save-score').addClass('hide');
 
@@ -478,20 +486,25 @@ function formControlHandler(e){
                 for( var j = 0; j < prevResults.length; j++) {
 
                     // result display string format - could use more attention to styling in the future
-                    resultText = " Initial: " + localStorage.key(i) + " -    Score: " + prevResults[j][0] + " -    Time elapsed: " + (120 - prevResults[j][1]) + " sec";
+                    resultText = localStorage.key(i) + " -    Score: " + prevResults[j][0] + " -    Time elapsed: " + (120 - prevResults[j][1]) + " sec";
                     
-                    // Create a <p> node
-                    var node = document.createElement("P");
+                    // Create a <li> list item "node"
+                    var node = $("<li>");
+
+                    // add bootstrap class to style the list item
+                    $(node).addClass('list-group-item');
+
+                    // add id attribute to the list item 
+                    $(node).attr("id", "list-item");
                     
                     // Create a text node                 
-                    var textnode = document.createTextNode(resultText);  
+                    $(node).text(resultText);  
                     
-                    // Append the text to <p>
-                    node.appendChild(textnode);    
-                    
-                    // Append <p> to <div> with id = "score-hist"
-                    document.getElementById("score-hist").appendChild(node);
-                }    
+                    // Append <li> elements to <ul> element of id = "score-hist"
+                    $('#score-hist').append(node);
+
+                } 
+                   
             }
 
         // check if event target id corresponds to the retry button
@@ -499,6 +512,17 @@ function formControlHandler(e){
 
             // reload page to start over and attempt to surpass previous scores
             location.reload();
+
+        }else if(e.target.id == "clear-btn"){
+
+            // clear score history by clearing localStorage   
+            localStorage.clear();
+
+            // remove clear button
+            $('#clear-btn').addClass('hide');
+
+            // change the score history text to inform user that localStorage has been cleared  
+            $("#score-hist").text("Score History: Cleared!"); 
 
         }
 

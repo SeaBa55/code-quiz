@@ -78,13 +78,20 @@ body {
 }
 
 /* Add space between form button controls in results section */
-#retry-btn {
+#retry-btn, #clear-btn{
     margin-left: 5px;
 }
 
 /* Add space below the score history section of results - this is the area where new scores will populate */
 #score-hist {
-    margin-bottom: 50px;
+    margin-bottom: 18px;
+}
+
+/* Add background color to the result list items to match card */
+#list-item {
+    background-color: lightgray;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0%;
 }
 
 /* Sticky footer properties */
