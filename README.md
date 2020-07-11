@@ -64,11 +64,17 @@ code_quiz_v2.0 - Added timer display area in the nav bar, using a input box as d
 
 code_quiz_v2.1 - Polished style of results section, added initial functionality to the the save button, and added a retry button that reloads the page (retry button can bypass the save feature, but is also availible after saving)(script.js lines 330-427); Added styling to the form button controls and the score history section (style.css 70-82); Removed class "btn-outline-dark" from the selected answes in the quiz to better visualize if the selection was wright or wrong (in mobile devices the "btn-outline-dark" styling would rened the selection dark until you came back to that question)(script.js lines 143, 153);
 
+code_quiz_v2.2 - Added input form element id of "form-input-init" to be able to reference the user's initials (used extensively in the formControlHandler function)(script.js line 367); Added functionality to be able to save user result data (initials, score, and time elapsed) to browser storge, and append the results to the #score-hist div element as children paragraph elements (localStorage utilized to save user results to browser storage)(script.js lines 418-466); Created a nested loop to extract stored user results from localStorage, and have them appended to the score history display area in the viewport (script.js lines 475-495). Added diable double tap zoom and overflow "hidden" the html and timer display elements, respectively, to help with viewport behavior while on mobile device (style.css lines 7-9, 21-24). 
+
 ## To-Do
 
-Promot for initials and save results for highscore (JSON), else there is option to quit (restarts without saving)
+fix rendering of the timer and score history section in iOS devices/ mobile view
 
 ## Wish List
+
+Review styling of viewport to make it a bit more entertaining to look at.
+
+Add reset button to give user the ability to clear results data in localStorage. 
 
 Display the number of unanswered questions remaining till completion.
 
@@ -76,7 +82,7 @@ Remove highlighted border around next and prev button when on next question afte
 
 Replace control buttons event listeners with one event listener, using the parent class "controls". Better practice, moving forward, as it is less taxing on memory and cleaner to debug/ look at.
 
-Consolidate the "foreach" loops that create the multiple choise buttons within startQuiz, nextQuest, and prevQuest functions into one function to tidy up javascript. 
+Consolidate the "foreach" loops that create the multiple choise buttons within startQuiz, nextQuest, and prevQuest functions into one function to tidy up javascript (refactor code). 
 
 - - -
 © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.

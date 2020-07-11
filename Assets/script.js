@@ -10,7 +10,7 @@ var questions = [
     answer: "parentheses"},
 
     {question: "Arrays in Javascript can be used to store ______.", 
-    options: ["numbers and strings", "other arrays", "booleans", "all of the above"],
+    options: ["numbers & strings", "other arrays", "booleans", "all of the above"],
     answer: "all of the above"},
 
     {question: "String values must be enclosed within ______ when being assigned to variables.", 
@@ -150,7 +150,7 @@ function selectAns(e){
                 // else, if the answer is incorrect, then show the button with class "btn-danger" for red styling
                 $('#'+e.target.id).addClass('btn-danger'); 
                 $('#'+e.target.id).removeClass('btn-outline-dark');
-                
+
                 // subtract 30 seconds off the clock
                 secondsLeft -= 30;
 
@@ -349,7 +349,7 @@ function results() {
 
     // add text to the card title to report user's current score
     $(resultDiv).text("Your Score: " + userScore + "%");
-    $(scoreHist).text("Your Score History:");
+    $(scoreHist).text("Score History:");
 
     // append new content to the card-body container
     $("#quiz-container").append(resultDiv,lineDiv,brk,scoreHist,formSave,formBtns);
@@ -364,6 +364,7 @@ function results() {
     $(formSave).attr("id", "form-save-score");
     $(formInput).attr("placeholder", "Your Initials");
     $(formBtns).attr("id", "form-control-btn");
+    $(formInput).attr("id", "form-input-init");
     $(formLable).text("Enter Initials");
     $(formSmall).text("Click Save to register score");
 
@@ -409,14 +410,91 @@ function formControlHandler(e){
             // hide #form-save-score div element
             $('#form-save-score').addClass('hide');
 
-            // ----------------------------------------------------------------
-            // save user data to browser, and append to #form-save-score (JSON)
-            // ----------------------------------------------------------------
+            // ------------------------------------------------------------------------
+            // save user data to browser storage, and append to #score-hist (localStorage)
+            // ------------------------------------------------------------------------
+
+            // initialize results array
+            var results = [];
+
+            // initialize prevResults array
+            var prevResults = [];
+
+            // initialize user result array
+            var userResult = [];
+
+            // initialize user input form (initals) var
+            var userIn = $('#form-input-init').val();
+
+            // push user quiz result data to userScore array 
+            userResult.push(userScore);
+            userResult.push(secondsLeft);
+
+            // results array encapsulates the userResult array items for a nested array structure (I found this easier that dealing with objects inside the results array for this application)
+            results.push(userResult);
+
+                // check if localStorage has been populated with new user results data
+            if (localStorage.getItem(userIn) == null){
+                
+                // if not, populate it with new user result
+                localStorage.setItem(userIn,JSON.stringify(results));
+
+            }else{                
+
+                // loop that checks if the current result user is duplicate
+                for( var i = 0; i < localStorage.length; i++) {
+
+                    // check if the currently indexed key is equivalent to the value of the input form (the provided user initials). If so, there is already an existing result element for this user.
+                    if(localStorage.key(i) == userIn) { 
+
+                        // get indexed localStorage item for previous user results, and parse it back to prevResults array
+                        prevResults = JSON.parse(localStorage.getItem(userIn));
+
+                        // push new result instance into prevResults array
+                        prevResults.push(results[0]);
+                        
+                        // save the concatinated resultant array back to results for storage
+                        results = prevResults;
+
+                        // add user results data back to localStorage  
+                        localStorage.setItem(userIn,JSON.stringify(results));
+
+                    }
+
+                }
+
+            }
 
             // show score history
             $('#score-hist').removeClass('hide');
-        
-        // check if target button id coresponds with retry button
+
+            // loop through localStorage to extract user results to append to viewport score history display area
+            for( var i = 0; i < localStorage.length; i++) {
+                
+                // add first item in localStorage to prevResults array
+                prevResults = JSON.parse(localStorage.getItem(localStorage.key(i)));
+
+                // loop through prevResults array to display previous user results for a single user 
+                for( var j = 0; j < prevResults.length; j++) {
+
+                    // result display string format - could use more attention to styling in the future
+                    resultText = " Initial: " + localStorage.key(i) + " -    Score: " + prevResults[j][0] + " -    Time elapsed: " + (120 - prevResults[j][1]) + " sec";
+                    
+                    // Create a <p> node
+                    var node = document.createElement("P");
+                    
+                    // Create a text node                 
+                    var textnode = document.createTextNode(resultText);  
+                    
+                    // Append the text to <p>
+                    node.appendChild(textnode);    
+                    
+                    // Append <p> to <div> with id = "score-hist"
+                    document.getElementById("score-hist").appendChild(node);
+                }    
+            }
+
+        // check if event target id corresponds to the retry button
         }else if(e.target.id == "retry-btn"){
 
             // reload page to start over and attempt to surpass previous scores
@@ -512,7 +590,7 @@ function setTime() {
     }
 
     // write the value of seconds left in the Timer window in viewport
-    document.getElementById("display").value = " " + secondsLeft + " sec";
+    document.getElementById("display").value = "" + secondsLeft + " sec";
 
     // if the timer runs out of time stop the timer and go results
     if(secondsLeft <= 0) {

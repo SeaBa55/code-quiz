@@ -3,6 +3,11 @@ html {
   min-height: 100%;
 }
 
+/* diable double tap zoom on mobile - I found it annoying for multipe choise quiz format */
+.disable-dbl-tap-zoom {
+    touch-action: manipulation;
+}
+
 /* styling for timer display label */
 #label {
     display: inline-block;
@@ -15,6 +20,7 @@ html {
 /* styling for timer display element */
 #display {
     display: block;
+    overflow: hidden;
 }
 
 body {
