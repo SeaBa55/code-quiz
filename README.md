@@ -32,7 +32,7 @@ The following animation demonstrates the application functionality:
 ![password generator demo](./Assets/Coding-Quiz.gif)
 
 
-### Version History
+## Version History
 
 code_quiz_v1.0 - Implementing template from js_password_generator assignment (Nav bar, background, card layout and sticky footer)(index.html & style.css); Also added container for questions, multiple choise buttons for answers, and Start/Next buttons for quiz navigation controls (index.html lines 44-51, 55-60). 
 
@@ -56,7 +56,7 @@ code_quiz_v1.9 - Added from elements to the results section, included is a place
 
 code_quiz_v2.0 - Added timer display area in the nav bar, using a input box as display (index.html lines 26-29); Added styling to both the timer display and the timer label (style.css lines 7-18); Added global variable "starTimer" used to start the time keeping function, and global variable "secondsLeft" for allotted quiz duration (also used for timer manipulation based on wrong answer selections)(script.js lines 38,41); Set "starTimer" variable equal to 1 in the startQuiz function to activate the timer upon quiz start (script.js line 81); Added timekeeping function using setTime() javascript method discussed in class. This function updates the timer display every second (script.js lines 448-485); Added timer variable "secondsLeft" to the selectAns function, where incorrect answers are processed. 30 seconds are subtracted from it to add time penalty for incorrect answer selection (script.js line 153).
 
-code_quiz_v2.1 - Polished style of results section, added initial functionality to the the save button, and added a retry button that reloads the page (retry button can bypass the save feature, but is also availible after saving)(script.js lines 330-427); Added styling to the form button controls and the score history section (style.css 70-82); Removed class "btn-outline-dark" from the selected answes in the quiz to better visualize if the selection was wright or wrong (in mobile devices the "btn-outline-dark" styling would rened the selection dark until you came back to that question)(script.js lines 143, 153);
+code_quiz_v2.1 - Polished style of results section, added initial functionality to the the save button, and added a retry button that reloads the page (retry button can bypass the save feature, but is also availible after saving)(script.js lines 330-427); Added styling to the form button controls and the score history section (style.css 70-82); Removed class "btn-outline-dark" from the selected answes in the quiz to better visualize if the selection was wright or wrong (in mobile devices the "btn-outline-dark" styling would rened the selection dark until you came back to that question)(script.js lines 143, 153).
 
 code_quiz_v2.2 - Added input form element id of "form-input-init" to be able to reference the user's initials (used extensively in the formControlHandler function)(script.js line 367); Added functionality to be able to save user result data (initials, score, and time elapsed) to browser storge, and append the results to the #score-hist div element as children paragraph elements (localStorage utilized to save user results to browser storage)(script.js lines 418-466); Created a nested loop to extract stored user results from localStorage, and have them appended to the score history display area in the viewport (script.js lines 475-495). Added diable double tap zoom and overflow "hidden" the html and timer display elements, respectively, to help with viewport behavior while on mobile device (style.css lines 7-9, 21-24). 
 
