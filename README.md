@@ -29,7 +29,7 @@ THEN I can save my initials and score
 
 The following animation demonstrates the application functionality:
 
-![code quiz](./Assets/Coding-Quiz)
+![password generator demo](./Assets/Coding-Quiz.gif)
 
 
 ### Version History
